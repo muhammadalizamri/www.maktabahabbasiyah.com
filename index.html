@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مكتبة عباسية — Khazanah Ilmu Islam</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{
+    --gold:#C9A84C;
+    --gold-light:#F0D080;
+    --dark:#1A1208;
+    --dark2:#2D2010;
+    --dark3:#3D2A14;
+    --parchment:#F5EDD8;
+    --ink:#2C1810;
+    --accent:#8B3A0F;
+  }
+  html{scroll-behavior:smooth}
+  body{
+    background:var(--dark);
+    color:var(--parchment);
+    font-family:'Noto Naskh Arabic',serif;
+    direction:rtl;
+    line-height:1.7;
+  }
+
+  /* ===== NAVBAR ===== */
+  nav{
+    background:var(--dark2);
+    border-bottom:1px solid rgba(201,168,76,0.35);
+    padding:0 2.5rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+    position:sticky;
+    top:0;
+    z-index:200;
+  }
+  .nav-logo{
+    font-family:'Amiri',serif;
+    font-size:1.6rem;
+    color:var(--gold);
+    text-decoration:none;
+    letter-spacing:0.04em;
+  }
+  .nav-links{
+    display:flex;
+    gap:1.8rem;
+    list-style:none;
+  }
+  .nav-links a{
+    color:var(--parchment);
+    text-decoration:none;
+    font-size:0.95rem;
+    opacity:0.8;
+    transition:opacity 0.2s,color 0.2s;
+  }
+  .nav-links a:hover{opacity:1;color:var(--gold)}
+  .nav-search-btn{
+    background:transparent;
+    border:1px solid rgba(201,168,76,0.4);
+    color:var(--gold);
+    padding:0.4rem 1rem;
+    border-radius:2px;
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:0.9rem;
+    cursor:pointer;
+    transition:background 0.2s;
+  }
+  .nav-search-btn:hover{background:rgba(201,168,76,0.1)}
+
+  /* ===== HERO ===== */
+  .hero{
+    position:relative;
+    padding:6rem 2rem 5rem;
+    text-align:center;
+    background:linear-gradient(180deg,#1A1208 0%,#2D1A08 45%,#1A1208 100%);
+    overflow:hidden;
+  }
+  .hero::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(ellipse 70% 50% at 50% 40%, rgba(201,168,76,0.08) 0%, transparent 70%);
+    pointer-events:none;
+  }
+  .hero-pattern{
+    position:absolute;
+    inset:0;
+    opacity:0.03;
+    background-image:
+      repeating-linear-gradient(45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%),
+      repeating-linear-gradient(-45deg,var(--gold) 0,var(--gold) 1px,transparent 0,transparent 50%);
+    background-size:30px 30px;
+    pointer-events:none;
+  }
+  .hero-top-ornament{
+    font-size:1.8rem;
+    color:var(--gold);
+    opacity:0.5;
+    display:block;
+    margin-bottom:1.2rem;
+    animation:fadeDown 1s ease both;
+  }
+  .hero h1{
+    font-family:'Amiri',serif;
+    font-size:clamp(2.4rem,6vw,4.2rem);
+    color:var(--gold);
+    line-height:1.25;
+    margin-bottom:0.4rem;
+    animation:fadeDown 1s 0.1s ease both;
+  }
+  .hero-subtitle{
+    display:block;
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:clamp(0.9rem,2vw,1.1rem);
+    color:var(--gold-light);
+    opacity:0.7;
+    font-weight:400;
+    margin-top:0.4rem;
+    letter-spacing:0.08em;
+    animation:fadeDown 1s 0.2s ease both;
+  }
+  .hero-divider{
+    width:140px;
+    height:1px;
+    background:linear-gradient(90deg,transparent,var(--gold),transparent);
+    margin:1.5rem auto;
+    animation:fadeIn 1s 0.3s ease both;
+  }
+  .hero p{
+    max-width:580px;
+    margin:0 auto 2.2rem;
+    color:var(--parchment);
+    opacity:0.78;
+    font-size:1.05rem;
+    animation:fadeDown 1s 0.35s ease both;
+  }
+  .hero-btns{
+    display:flex;
+    gap:1rem;
+    justify-content:center;
+    flex-wrap:wrap;
+    animation:fadeDown 1s 0.45s ease both;
+  }
+  .btn-primary{
+    background:var(--gold);
+    color:var(--dark);
+    border:none;
+    padding:0.8rem 2.4rem;
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:1rem;
+    font-weight:700;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.2s,transform 0.15s;
+  }
+  .btn-primary:hover{background:var(--gold-light);transform:translateY(-2px)}
+  .btn-secondary{
+    background:transparent;
+    color:var(--gold);
+    border:1px solid rgba(201,168,76,0.5);
+    padding:0.8rem 2.4rem;
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:1rem;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.2s,transform 0.15s;
+  }
+  .btn-secondary:hover{background:rgba(201,168,76,0.08);transform:translateY(-2px)}
+
+  @keyframes fadeDown{from{opacity:0;transform:translateY(-18px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+
+  /* ===== STATS ===== */
+  .stats-bar{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    background:var(--dark2);
+    border-top:1px solid rgba(201,168,76,0.2);
+    border-bottom:1px solid rgba(201,168,76,0.2);
+  }
+  .stat{
+    flex:1;
+    min-width:130px;
+    padding:1.6rem 1rem;
+    text-align:center;
+    border-left:1px solid rgba(201,168,76,0.12);
+  }
+  .stat:last-child{border-left:none}
+  .stat-num{
+    font-family:'Amiri',serif;
+    font-size:2.1rem;
+    color:var(--gold);
+    display:block;
+    line-height:1.1;
+  }
+  .stat-lbl{
+    font-size:0.82rem;
+    color:var(--parchment);
+    opacity:0.55;
+    margin-top:0.3rem;
+    display:block;
+  }
+
+  /* ===== SECTION COMMON ===== */
+  .section-wrap{padding:4rem 2rem;max-width:1120px;margin:0 auto}
+  .section-header{text-align:center;margin-bottom:2.8rem}
+  .ornament-row{display:flex;align-items:center;justify-content:center;gap:0.8rem;margin-bottom:0.8rem}
+  .ornament-row::before,.ornament-row::after{
+    content:'';flex:1;max-width:100px;height:1px;
+    background:linear-gradient(90deg,transparent,rgba(201,168,76,0.4));
+  }
+  .ornament-row span{color:var(--gold);opacity:0.6;font-size:1rem}
+  .section-header h2{font-family:'Amiri',serif;font-size:2rem;color:var(--gold);margin-bottom:0.4rem}
+  .section-header p{color:var(--parchment);opacity:0.55;font-size:0.95rem}
+
+  /* ===== CATEGORIES ===== */
+  .cat-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:1rem;
+  }
+  .cat-card{
+    background:var(--dark2);
+    border:1px solid rgba(201,168,76,0.18);
+    border-radius:4px;
+    padding:1.8rem 1rem;
+    text-align:center;
+    cursor:pointer;
+    transition:border-color 0.25s,transform 0.2s,background 0.25s;
+    text-decoration:none;
+    display:block;
+  }
+  .cat-card:hover{
+    border-color:var(--gold);
+    transform:translateY(-3px);
+    background:rgba(201,168,76,0.05);
+  }
+  .cat-icon{font-size:2.4rem;display:block;margin-bottom:0.8rem}
+  .cat-card h3{font-family:'Amiri',serif;font-size:1.1rem;color:var(--gold);margin-bottom:0.25rem}
+  .cat-card p{font-size:0.8rem;color:var(--parchment);opacity:0.5}
+
+  /* ===== SEARCH ===== */
+  .search-section{background:rgba(201,168,76,0.04);border-top:1px solid rgba(201,168,76,0.1);border-bottom:1px solid rgba(201,168,76,0.1);padding:3.5rem 2rem}
+  .search-inner{max-width:1120px;margin:0 auto}
+  .search-bar{
+    max-width:620px;
+    margin:0 auto 0.75rem;
+    display:flex;
+    gap:0.5rem;
+  }
+  .search-bar input{
+    flex:1;
+    background:var(--dark2);
+    border:1px solid rgba(201,168,76,0.3);
+    border-radius:2px;
+    padding:0.75rem 1.1rem;
+    color:var(--parchment);
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:1rem;
+    direction:rtl;
+    transition:border-color 0.2s;
+  }
+  .search-bar input::placeholder{color:var(--parchment);opacity:0.3}
+  .search-bar input:focus{outline:none;border-color:var(--gold)}
+  .search-bar button{
+    background:var(--gold);
+    border:none;
+    padding:0.75rem 1.4rem;
+    border-radius:2px;
+    color:var(--dark);
+    font-family:'Noto Naskh Arabic',serif;
+    font-size:0.95rem;
+    font-weight:700;
+    cursor:pointer;
+    transition:background 0.2s;
+  }
+  .search-bar button:hover{background:var(--gold-light)}
+  .search-tags{display:flex;gap:0.5rem;justify-content:center;flex-wrap:wrap;margin-top:0.8rem}
+  .tag{
+    background:transparent;
+    border:1px solid rgba(201,168,76,0.25);
+    color:var(--gold);
+    font-size:0.8rem;
+    padding:0.3rem 0.8rem;
+    border-radius:2px;
+    cursor:pointer;
+    transition:background 0.2s;
+    font-family:'Noto Naskh Arabic',serif;
+  }
+  .tag:hover{background:rgba(201,168,76,0.1)}
+
+  /* ===== BOOK GRID ===== */
+  .book-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(185px,1fr));
+    gap:1.2rem;
+    margin-top:1.5rem;
+  }
+  .book-card{
+    background:var(--dark2);
+    border:1px solid rgba(201,168,76,0.15);
+    border-radius:4px;
+    overflow:hidden;
+    cursor:pointer;
+    transition:border-color 0.25s,transform 0.2s;
+    text-decoration:none;
+    display:block;
+    color:inherit;
+  }
+  .book-card:hover{border-color:var(--gold);transform:translateY(-3px)}
+  .book-cover{
+    height:150px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:3.2rem;
+    background:linear-gradient(135deg,var(--dark3),#2D1A08);
+    border-bottom:1px solid rgba(201,168,76,0.18);
+    position:relative;
+    overflow:hidden;
+  }
+  .book-cover::after{
+    content:'';
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at 30% 30%,rgba(201,168,76,0.06),transparent 60%);
+  }
+  .book-info{padding:1rem}
+  .book-info h4{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold);margin-bottom:0.2rem;line-height:1.4}
+  .book-info .author{font-size:0.8rem;color:var(--parchment);opacity:0.5;margin-bottom:0.55rem}
+  .book-badge{
+    display:inline-block;
+    font-size:0.7rem;
+    padding:2px 8px;
+    border-radius:2px;
+    border:1px solid rgba(201,168,76,0.28);
+    color:var(--gold);
+    opacity:0.85;
+  }
+
+  /* ===== FEATURED SCHOLAR ===== */
+  .scholars-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:1.2rem;
+  }
+  .scholar-card{
+    background:var(--dark2);
+    border:1px solid rgba(201,168,76,0.15);
+    border-radius:4px;
+    padding:1.5rem;
+    display:flex;
+    gap:1rem;
+    align-items:flex-start;
+    cursor:pointer;
+    transition:border-color 0.25s,transform 0.2s;
+  }
+  .scholar-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+  .scholar-avatar{
+    width:52px;height:52px;min-width:52px;
+    border-radius:50%;
+    background:linear-gradient(135deg,var(--dark3),#4D3020);
+    border:1px solid rgba(201,168,76,0.3);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Amiri',serif;font-size:1.3rem;color:var(--gold);
+  }
+  .scholar-info h4{font-family:'Amiri',serif;font-size:1.05rem;color:var(--gold);margin-bottom:0.2rem}
+  .scholar-info p{font-size:0.8rem;color:var(--parchment);opacity:0.55;line-height:1.5}
+
+  /* ===== ABOUT STRIP ===== */
+  .about-strip{
+    background:linear-gradient(135deg,var(--dark2),var(--dark3));
+    border-top:1px solid rgba(201,168,76,0.2);
+    border-bottom:1px solid rgba(201,168,76,0.2);
+    padding:3.5rem 2rem;
+    text-align:center;
+  }
+  .about-strip-inner{max-width:680px;margin:0 auto}
+  .about-strip h2{font-family:'Amiri',serif;font-size:1.8rem;color:var(--gold);margin-bottom:1rem}
+  .about-strip p{color:var(--parchment);opacity:0.72;font-size:0.98rem;margin-bottom:1.5rem;line-height:1.9}
+
+  /* ===== FOOTER ===== */
+  footer{
+    background:var(--dark2);
+    border-top:1px solid rgba(201,168,76,0.2);
+    padding:3rem 2rem 2rem;
+  }
+  .footer-grid{
+    max-width:1120px;
+    margin:0 auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:2rem;
+    margin-bottom:2rem;
+  }
+  .footer-col h4{font-family:'Amiri',serif;color:var(--gold);font-size:1.1rem;margin-bottom:0.8rem}
+  .footer-col p,.footer-col a{font-size:0.85rem;color:var(--parchment);opacity:0.5;text-decoration:none;display:block;margin-bottom:0.4rem;transition:opacity 0.2s}
+  .footer-col a:hover{opacity:0.9;color:var(--gold)}
+  .footer-bottom{
+    max-width:1120px;
+    margin:0 auto;
+    border-top:1px solid rgba(201,168,76,0.1);
+    padding-top:1.2rem;
+    text-align:center;
+    font-size:0.82rem;
+    color:var(--parchment);
+    opacity:0.35;
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav>
+  <a class="nav-logo" href="#">مكتبة عباسية</a>
+  <ul class="nav-links">
+    <li><a href="#">الرئيسية</a></li>
+    <li><a href="#">الفهرس</a></li>
+    <li><a href="#">المخطوطات</a></li>
+    <li><a href="#">المؤلفون</a></li>
+    <li><a href="#">تواصل معنا</a></li>
+  </ul>
+  <button class="nav-search-btn">🔍 بحث</button>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-pattern"></div>
+  <span class="hero-top-ornament">❧ ✦ ❧</span>
+  <h1>مكتبة عباسية
+    <span class="hero-subtitle">Khazanah Ilmu Peradaban Islam</span>
+  </h1>
+  <div class="hero-divider"></div>
+  <p>كنوز المعرفة الإسلامية — koleksi kitab, manuskrip, dan karya ulama dari zaman keemasan peradaban Islam tersedia untuk dibaca dan dipelajari secara gratis.</p>
+  <div class="hero-btns">
+    <button class="btn-primary">تصفّح المكتبة &nbsp;←</button>
+    <button class="btn-secondary">عن المكتبة</button>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat"><span class="stat-num">٤٨٠٠+</span><span class="stat-lbl">كتاب ومخطوطة</span></div>
+  <div class="stat"><span class="stat-num">٢٣٠+</span><span class="stat-lbl">مؤلف وعالم</span></div>
+  <div class="stat"><span class="stat-num">١٢</span><span class="stat-lbl">تخصص علمي</span></div>
+  <div class="stat"><span class="stat-num">مجاني</span><span class="stat-lbl">وصول مفتوح للجميع</span></div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="ornament-row"><span>✦</span></div>
+    <h2>التخصصات العلمية</h2>
+    <p>Jelajahi koleksi berdasarkan bidang ilmu</p>
+  </div>
+  <div class="cat-grid">
+    <a class="cat-card" href="#"><span class="cat-icon">📖</span><h3>علم الفقه</h3><p>Fikih & Hukum Islam</p></a>
+    <a class="cat-card" href="#"><span class="cat-icon">🌟</span><h3>علم الحديث</h3><p>Hadits & Musthalah</p></a>
+    <a class="cat-card" href="#"><span class="cat-icon">🕌</span><h3>علم الكلام</h3><p>Teologi & Akidah</p></a>
+    <a class="cat-card" href="#"><span class="cat-icon">📜</span><h3>التفسير</h3><p>Tafsir Al-Quran</p></a>
+    <a class="cat-card" href="#"><span class="cat-icon">⚗️</span><h3>الفلسفة</h3><p>Filsafat & Mantik</p></a>
+    <a class="cat-card" href="#"><span class="cat-icon">✍️</span><h3>الأدب</h3><p>Sastra & Bahasa Arab</p></a>
+  </div>
+</div>
+
+<!-- SEARCH + BOOKS -->
+<div class="search-section">
+  <div class="search-inner">
+    <div class="section-header">
+      <div class="ornament-row"><span>✦</span></div>
+      <h2>الكتب المميّزة</h2>
+      <p>Pilihan kitab unggulan dari koleksi perpustakaan</p>
+    </div>
+    <div class="search-bar">
+      <input type="text" placeholder="ابحث عن كتاب أو مؤلف...">
+      <button>بحث</button>
+    </div>
+    <div class="search-tags">
+      <button class="tag">الفقه</button>
+      <button class="tag">الحديث</button>
+      <button class="tag">التفسير</button>
+      <button class="tag">الفلسفة</button>
+      <button class="tag">الأدب</button>
+      <button class="tag">التصوف</button>
+    </div>
+    <div class="book-grid">
+      <a class="book-card" href="#"><div class="book-cover">📗</div><div class="book-info"><h4>إحياء علوم الدين</h4><p class="author">الإمام الغزالي</p><span class="book-badge">التصوف والأخلاق</span></div></a>
+      <a class="book-card" href="#"><div class="book-cover">📙</div><div class="book-info"><h4>مقدمة ابن خلدون</h4><p class="author">ابن خلدون</p><span class="book-badge">التاريخ والاجتماع</span></div></a>
+      <a class="book-card" href="#"><div class="book-cover">📘</div><div class="book-info"><h4>الشفاء</h4><p class="author">ابن سينا</p><span class="book-badge">الفلسفة والطب</span></div></a>
+      <a class="book-card" href="#"><div class="book-cover">📕</div><div class="book-info"><h4>الكتاب</h4><p class="author">سيبويه</p><span class="book-badge">النحو والصرف</span></div></a>
+      <a class="book-card" href="#"><div class="book-cover">📔</div><div class="book-info"><h4>تهذيب الأخلاق</h4><p class="author">ابن مسكويه</p><span class="book-badge">الأخلاق</span></div></a>
+      <a class="book-card" href="#"><div class="book-cover">📒</div><div class="book-info"><h4>الفصل في الملل</h4><p class="author">ابن حزم</p><span class="book-badge">علم الأديان</span></div></a>
+    </div>
+  </div>
+</div>
+
+<!-- SCHOLARS -->
+<div class="section-wrap">
+  <div class="section-header">
+    <div class="ornament-row"><span>✦</span></div>
+    <h2>أعلام الفكر الإسلامي</h2>
+    <p>Para ulama dan ilmuwan besar peradaban Islam</p>
+  </div>
+  <div class="scholars-grid">
+    <div class="scholar-card"><div class="scholar-avatar">غز</div><div class="scholar-info"><h4>الإمام الغزالي</h4><p>٤٥٠–٥٠٥ هـ · فيلسوف وفقيه ومتكلم</p></div></div>
+    <div class="scholar-card"><div class="scholar-avatar">سن</div><div class="scholar-info"><h4>ابن سينا</h4><p>٣٧٠–٤٢٨ هـ · طبيب وفيلسوف</p></div></div>
+    <div class="scholar-card"><div class="scholar-avatar">خل</div><div class="scholar-info"><h4>ابن خلدون</h4><p>٧٣٢–٨٠٨ هـ · مؤرخ وفيلسوف اجتماعي</p></div></div>
+    <div class="scholar-card"><div class="scholar-avatar">رش</div><div class="scholar-info"><h4>ابن رشد</h4><p>٥٢٠–٥٩٥ هـ · فيلسوف وطبيب</p></div></div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div class="about-strip">
+  <div class="about-strip-inner">
+    <div class="ornament-row"><span>❧</span></div>
+    <h2>عن مكتبة عباسية</h2>
+    <p>مكتبة عباسية هي مشروع رقمي مفتوح يهدف إلى الحفاظ على التراث العلمي الإسلامي وإتاحته لكل طالب علم في أي مكان بالعالم. نسعى لجمع المخطوطات والكتب النادرة وتيسير الوصول إليها مجاناً.</p>
+    <p style="font-size:0.9rem;font-style:italic;opacity:0.55">Maktabah Abbasiyah adalah perpustakaan digital gratis untuk semua pencari ilmu di seluruh dunia.</p>
+    <button class="btn-primary">اقرأ المزيد</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-col">
+      <h4>مكتبة عباسية</h4>
+      <p>مكتبة رقمية مفتوحة لنشر التراث العلمي الإسلامي</p>
+    </div>
+    <div class="footer-col">
+      <h4>روابط سريعة</h4>
+      <a href="#">الرئيسية</a>
+      <a href="#">الفهرس الكامل</a>
+      <a href="#">المخطوطات</a>
+      <a href="#">المؤلفون</a>
+    </div>
+    <div class="footer-col">
+      <h4>التخصصات</h4>
+      <a href="#">علم الفقه</a>
+      <a href="#">علم الحديث</a>
+      <a href="#">التفسير</a>
+      <a href="#">الفلسفة والمنطق</a>
+    </div>
+    <div class="footer-col">
+      <h4>تواصل معنا</h4>
+      <a href="#">البريد الإلكتروني</a>
+      <a href="#">عن المشروع</a>
+      <a href="#">المساهمة</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    © ١٤٤٦ هـ مكتبة عباسية · وصول مجاني للجميع · جميع الحقوق محفوظة
+  </div>
+</footer>
+
+</body>
+</html>
